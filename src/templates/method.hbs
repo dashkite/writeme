@@ -1,0 +1,45 @@
+# {{name}}
+
+_Method_
+
+{{summary}}
+
+{{#each signatures}}
+<pre><code>
+{{~#each arguments}}
+{{~#if @first}}{{name}}.{{../../name~}}
+{{else}} {{name~}}{{#unless @last}},{{/unless}}{{/if~}}
+{{/each}}
+ &rarr; {{returns.name~}}</code></pre>
+<br>
+{{/each}}
+
+| name | type | description |
+|------|------|-------------|
+{{#each signatures}}
+{{#each arguments}}
+|{{name}}|{{#if type}}{{type}}{{else}}any{{/if}}|{{description}}|
+{{/each}}
+|{{returns.name}}|{{returns.type}}|{{returns.description}}|
+{{/each}}
+
+{{#if description}}
+## Description
+
+{{description}}
+{{/if}}
+
+{{#if examples}}
+## Examples
+
+{{#each examples}}
+{{#each code}}
+
+{{#if label}} ||| {{label}} {{/if}}
+```{{language}} {{../title}}
+{{{code}}}
+```
+
+{{/each}}
+{{/each}}
+{{/if}}

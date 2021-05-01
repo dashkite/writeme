@@ -1,7 +1,7 @@
 {
-  "name": "@dashkite/module",
+  "name": "@dashkite/writeme",
   "version": "0.0.0",
-  "description": "",
+  "description": "Generate Markdown reference documentation from metadata.",
   "main": "build/node/src/index.js",
   "exports": {
     ".": {
@@ -36,6 +36,11 @@
     "@dashkite/joy": "^0.1.8",
     "@dashkite/masonry": "^0.7.1",
     "amen": "^3.0.0",
-    "coffeescript": "^2.5.1"
+    "coffeescript": "^2.5.1",
+    "js-yaml": "^4.1.0"
+  },
+  "dependencies": {
+    "handlebars": "^4.7.7",
+    "marked": "^2.0.3"
   }
 }

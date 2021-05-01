@@ -1,0 +1,23 @@
+name: push
+type: function
+summary: Push an item onto the stack.
+signatures:
+- arguments:
+  - name: stack
+    type: Stack
+    description: A stack.
+  - name: item
+    description: The item to push onto the stack.
+  returns:
+    name: stack
+    type: Stack
+    description: A new stack with _item_ pushed onto it.
+description: >-
+  Pushes the _item_ onto _stack_, returning a new stack.
+examples:
+- title: Pushing an item onto the stack.
+  code:
+    CoffeeScript: >-
+      stack = push item, stack
+    JavaScript: >-
+      stack = push(item, stack);

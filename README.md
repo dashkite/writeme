@@ -1,8 +1,55 @@
-# Project Name
+# WriteMe
 
-*Short project description*
+*Generate Markdown reference documentation from metadata using JavaScript.*
 
-Longer description that contains a short code example
+```coffeescript
+import { compile } from "@dashkite/writeme"
+import YAML from "js-yaml"
+
+assert /^# Push/.test marked compile YAML.load """
+  name: push
+  type: function
+  description: Push an item onto the stack.
+  signatures:
+  - arguments:
+    - name: stack
+			type: Stack
+			description: A stack.
+    - name: item
+      description: The item to push onto the stack.
+    returns:
+      name: stack
+      type: Stack
+      description: A new stack with _item_ pushed onto it.
+"""
+```
+
+Generates a document that will render to HTML something like this:
+
+> # Push
+>
+> *Function*
+>
+> `push stack, item → stack`
+>
+> | name    | type        | description                            |
+> | ------- | ----------- | -------------------------------------- |
+> | stack   | [`Stack`][] | A stack.                               |
+> | item    | any         | The item to push onto the stack.       |
+> | → stack | [`Stack`][] | A new stack with _item_ pushed onto it |
+>
+> Push an item onto the stack.
+
+Links are resolved using an optional index. You can generate an index using `index`, optionally passing it an index to update.
+
+```coffeescript
+import { index } from "@dashkite/writeme"
+import YAML from "js-yaml"
+
+assert (index name: "foo", "./foo.md")["foo"] == "./foo.md"
+```
+
+
 
 ## Features
 
