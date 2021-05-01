@@ -1,6 +1,6 @@
 {
   "name": "@dashkite/writeme",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Generate Markdown reference documentation from metadata.",
   "main": "build/node/src/index.js",
   "exports": {
