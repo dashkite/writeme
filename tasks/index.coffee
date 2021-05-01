@@ -7,7 +7,19 @@ import {coffee} from "@dashkite/masonry/coffee"
 
 t.define "clean", -> m.rm "build"
 
-t.define "build", "clean", m.start [
+t.define "templates", m.start [
+  m.glob [ "{src,test}/**/*.hbs" ], "."
+  m.copy p.join "build", "import"
+  m.copy p.join "build", "node"
+]
+
+t.define "markdown", m.start [
+  m.glob [ "test/**/*.md" ], "."
+  m.copy p.join "build", "import"
+  m.copy p.join "build", "node"
+]
+
+t.define "build", [ "clean", "templates", "markdown" ], m.start [
   m.glob [ "{src,test}/**/*.coffee" ], "."
   m.read
   _.flow [
