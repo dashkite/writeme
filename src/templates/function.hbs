@@ -2,7 +2,7 @@
 
 _Function_
 
-{{summary}}
+{{{summary}}}
 
 {{#each signatures}}
 <pre><code>{{../name~}}
@@ -17,9 +17,10 @@ _Function_
 |------|------|-------------|
 {{#each signatures}}
 {{#each arguments}}
-|{{name}}|{{#if type}}{{type}}{{else}}any{{/if}}|{{description}}|
+|{{name}}|{{#if type}}[`{{type}}`][]{{else}}any{{/if}}|{{description}}|
 {{/each}}
-|{{returns.name}}|{{returns.type}}|{{returns.description}}|
+|{{returns.name}}|{{#if returns.type}}[`{{returns.type}}`][]{{else}}any{{/if}}|
+  {{~returns.description}}|
 {{/each}}
 
 {{#if description}}

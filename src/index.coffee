@@ -39,9 +39,27 @@ denormalize = do ({
             language: _.toLowerCase language
             label: if labels then language
 
-compile = (description, index = {}) ->
+normalize = (reference) ->
+  reference.toLowerCase().replace /[^\w\s]/g, ""
 
-  templates[ description.type ] denormalize description
+compile = (description, index = {}) ->
+  md = templates[ description.type ] denormalize description
+  if ! _.isEmpty index
+    references = []
+    # first, normalize the references
+    md = md.replace /\[([^\]]+)]\[([^\]]*)\]/gm, (matches, text, reference) ->
+      reference = normalize if reference == "" then text else reference
+      references.push reference
+      "[#{text}][#{reference}]"
+    # now append the links if necessary
+    for reference in references
+      if !(///^\[#{reference}\]:///m.test md)
+        if index[reference]?
+          md += "\n[#{reference}]: #{index[reference]}"
+        else
+          console.warn "writeme: no link for for '#{reference}'"
+          md += "\n[#{reference}]: #"
+  md
 
 export {
   compile

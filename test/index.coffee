@@ -22,7 +22,9 @@ do ->
         m.glob [ "**/*.yaml" ], "./test/spec"
         m.read
         _.flow [
-          m.tr ({input}) -> $.compile YAML.load input
+          m.tr ({input}) ->
+            $.compile (YAML.load input),
+              stack: "/types/stack"
           m.extension ".md"
           m.write "test/docs/reference"
         ]
