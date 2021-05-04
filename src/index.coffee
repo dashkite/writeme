@@ -30,6 +30,7 @@ denormalize = do ({
   labels
 } = {}) ->
   _.tee (description) ->
+    description.title ?= description.name
     if description.examples?
       for example in description.examples
         labels = ! _.isEmpty _.keys example.code

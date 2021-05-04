@@ -49,12 +49,39 @@ import YAML from "js-yaml"
 assert (index name: "foo", "./foo.md")["foo"] == "./foo.md"
 ```
 
-
-
 ## Features
 
+- Functions
+- Classes: coming soon
+- Methods: coming soon
 
 ## Install
 
+```shell
+npm i -D @dashkite/writeme
+```
+
 
 ## Reference
+
+### API
+
+#### compile
+
+`compile yaml → markdown`
+
+Compiles the given YAML specification into Markdown.
+
+### Schema
+
+#### Function
+
+Coming soon.
+
+#### Class
+
+Coming soon.
+
+#### Method
+
+Coming soon.

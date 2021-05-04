@@ -1,8 +1,6 @@
-# {{name}}
+# {{title}}
 
-_Function_
-
-{{{summary}}}
+_Function_ &bull; {{{summary}}}
 
 {{#each signatures}}
 <pre><code>{{../name~}}
@@ -22,6 +20,13 @@ _Function_
 |{{returns.name}}|{{#if returns.type}}[`{{returns.type}}`][]{{else}}any{{/if}}|
   {{~returns.description}}|
 {{/each}}
+
+{{#if aliases}}
+**Aliases:**
+{{#each aliases}}
+{{.}}{{#unless @last}}, {{/unless~}}
+{{/each}}
+{{/if}}
 
 {{#if description}}
 ## Description
