@@ -23,6 +23,14 @@ templates =
   type: template "type"
   method: template "method"
 
+addSymbol = (symbols, symbol) ->
+  if symbols[ symbol.name ]? && ! _.equal symbols[ symbol.name ], symbol
+    console.warn "writeme: Conflicting symbol definitions
+      for #{symbol.name}"
+  else
+    symbols[ symbol.name ] = symbol
+  symbols
+
 denormalize = do ({
   example
   language
@@ -30,7 +38,20 @@ denormalize = do ({
   labels
 } = {}) ->
   _.tee (description) ->
+
     description.title ?= description.name
+
+    if description.signatures?
+      description.symbols = {}
+      for signature in description.signatures
+        if signature.arguments?
+          for argument in signature.arguments
+            addSymbol description.symbols, argument
+        returns = {signature.returns...}
+        if returns.name?
+          returns.name = "&rarr; #{returns.name}"
+        addSymbol description.symbols, returns
+
     if description.examples?
       for example in description.examples
         labels = ! _.isEmpty _.keys example.code

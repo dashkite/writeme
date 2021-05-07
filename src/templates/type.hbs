@@ -1,5 +1,23 @@
 # {{name}}
 
-_Type_
+_Type_ &bull; {{{summary}}}
 
-{{summary}}
+{{#if properties.static}}
+## Static Properties
+
+| name | type | description |
+|------|------|-------------|
+{{#each properties.static}}
+|{{{name}}}|{{#if type}}[`{{type}}`][]{{else}}any{{/if}}|{{{description}}}|
+{{/each}}
+{{/if}}
+
+{{#if properties.instance}}
+## Instance Properties
+
+| name | type | description |
+|------|------|-------------|
+{{#each properties.instance}}
+|{{{name}}}|{{#if type}}[`{{type}}`][]{{else}}any{{/if}}|{{{description}}}|
+{{/each}}
+{{/if}}

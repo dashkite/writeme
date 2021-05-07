@@ -4,21 +4,19 @@ _Function_ &bull; {{{summary}}}
 
 {{#each signatures}}
 <pre><code>{{../name~}}
+{{#if arguments~}}
 {{#each arguments}}
  {{name~}}{{#unless @last}},{{/unless~}}
 {{/each}}
+{{/if}}
  &rarr; {{returns.name~}}</code></pre>
 <br>
 {{/each}}
 
 | name | type | description |
 |------|------|-------------|
-{{#each signatures}}
-{{#each arguments}}
-|{{name}}|{{#if type}}[`{{type}}`][]{{else}}any{{/if}}|{{description}}|
-{{/each}}
-|{{returns.name}}|{{#if returns.type}}[`{{returns.type}}`][]{{else}}any{{/if}}|
-  {{~returns.description}}|
+{{#each symbols}}
+|{{{name}}}|{{#if type}}[`{{type}}`][]{{else}}any{{/if}}|{{{description}}}|
 {{/each}}
 
 {{#if aliases}}
@@ -31,7 +29,7 @@ _Function_ &bull; {{{summary}}}
 {{#if description}}
 ## Description
 
-{{description}}
+{{{description}}}
 {{/if}}
 
 {{#if examples}}

@@ -1,32 +1,39 @@
-# {{name}}
+# {{title}}
 
-_Method_
-
-{{summary}}
+_Method_ &bull; {{{summary}}}
 
 {{#each signatures}}
 <pre><code>
-{{~#each arguments}}
-{{~#if @first}}{{name}}.{{../../name~}}
-{{else}} {{name~}}{{#unless @last}},{{/unless}}{{/if~}}
+{{~#if arguments~}}
+{{#each arguments}}
+{{#if @first}}
+  {{~name}}.{{../../name~}}
+{{else~}}
+  &nbsp;{{~name~}}{{#unless @last}},{{/unless~}}
+{{/if~}}
 {{/each}}
+{{/if}}
  &rarr; {{returns.name~}}</code></pre>
 <br>
 {{/each}}
 
 | name | type | description |
 |------|------|-------------|
-{{#each signatures}}
-{{#each arguments}}
-|{{name}}|{{#if type}}{{type}}{{else}}any{{/if}}|{{description}}|
+{{#each symbols}}
+|{{{name}}}|{{#if type}}[`{{type}}`][]{{else}}any{{/if}}|{{{description}}}|
 {{/each}}
-|{{returns.name}}|{{returns.type}}|{{returns.description}}|
+
+{{#if aliases}}
+**Aliases:**
+{{#each aliases}}
+{{.}}{{#unless @last}}, {{/unless~}}
 {{/each}}
+{{/if}}
 
 {{#if description}}
 ## Description
 
-{{description}}
+{{{description}}}
 {{/if}}
 
 {{#if examples}}
