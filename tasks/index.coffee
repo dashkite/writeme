@@ -42,3 +42,6 @@ t.define "node:test", [ "build" ], ->
 
 t.define "test", [ "clean" ], ->
   require "../test"
+
+t.define "watch", "build", ->
+  m.watch "src", -> t.run "build"

@@ -4,13 +4,10 @@ _Method_ &bull; {{{summary}}}
 
 {{#each signatures}}
 <pre><code>
+{{~../receiver.name}}.{{../name~}}
 {{~#if arguments~}}
-{{#each arguments}}
-{{#if @first}}
-  {{~name}}.{{../../name~}}
-{{else~}}
+{{#each arguments~}}
   &nbsp;{{~name~}}{{#unless @last}},{{/unless~}}
-{{/if~}}
 {{/each}}
 {{/if}}
  &rarr; {{returns.name~}}</code></pre>

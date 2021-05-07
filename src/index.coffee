@@ -25,7 +25,7 @@ templates =
 
 addSymbol = (symbols, symbol) ->
   if symbols[ symbol.name ]? && ! _.equal symbols[ symbol.name ], symbol
-    console.warn "writeme: Conflicting symbol definitions
+    console.warn "writeme: conflicting symbol definitions
       for #{symbol.name}"
   else
     symbols[ symbol.name ] = symbol
@@ -41,8 +41,16 @@ denormalize = do ({
 
     description.title ?= description.name
 
-    if description.signatures?
+    if description.type == "method" && description.receiver?
       description.symbols = {}
+      description.receiver =
+        name: _.dashes description.receiver
+        type: description.receiver
+        description: "An instance of #{description.receiver}"
+      addSymbol description.symbols, description.receiver
+
+    if description.signatures?
+      description.symbols ?= {}
       for signature in description.signatures
         if signature.arguments?
           for argument in signature.arguments
@@ -62,7 +70,7 @@ denormalize = do ({
             label: if labels then language
 
 normalize = (reference) ->
-  reference.toLowerCase().replace /[^\w\s]/g, ""
+  reference.replace /[^\w\s]/g, ""
 
 compile = (description, index = {}) ->
   md = templates[ description.type ] denormalize description
