@@ -32,7 +32,7 @@
   },
   "homepage": "https://github.com/dashkite/module#readme",
   "devDependencies": {
-    "@dashkite/genie": "^0.1.0",
+    "@dashkite/genie": "^0.5.0",
     "@dashkite/joy": "^0.2.4",
     "@dashkite/masonry": "^0.7.1",
     "amen": "^3.0.0",

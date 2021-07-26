@@ -5,22 +5,47 @@ order: 1
 
 _Function_ &bull; {{{summary}}}
 
-{{#each signatures}}
-<pre><code>{{../name~}}
+{{#*inline "signature"}}
+<pre><code>{{name~}}
 {{#if arguments~}}
 {{#each arguments}}
- {{name~}}{{#unless @last}},{{/unless~}}
+ {{name}}{{#unless @last}},{{/unless~}}
 {{/each}}
 {{/if}}
  &rarr; {{returns.name~}}</code></pre>
-<br>
-{{/each}}
+{{/inline}}
+
+{{#each signatures}}
+==- {{> signature . name=../name~}}
+<hr>
+
+[!badge size="xl" variant="primary" text="Arguments"]
 
 | name | type | description |
 |------|------|-------------|
-{{#each symbols}}
-|{{{name}}}|{{#if type}}[`{{type}}`][]{{else}}any{{/if}}|{{{description}}}|
+{{#each arguments}}
+|{{{name}}}|{{#if type}}[`{{type}}`][]{{else}}Any{{/if}}|{{{description}}}|
 {{/each}}
+
+<br>
+
+[!badge size="xl" variant="success" text="Returns"]
+
+| name | type | description |
+|------|------|-------------|
+{{#with returns}}
+|{{{name}}}|{{#if type}}[`{{type}}`][]{{else}}Any{{/if}}|{{{description}}}|
+{{/with}}
+
+{{#if description}}
+## Description
+
+{{{description}}}
+{{/if}}
+
+{{/each}}
+
+===
 
 {{#if aliases}}
 **Aliases:**
@@ -35,17 +60,23 @@ _Function_ &bull; {{{summary}}}
 {{{description}}}
 {{/if}}
 
-{{#if examples}}
+{{#if example}}
 ## Examples
 
-{{#each examples}}
-{{#each code}}
+{{{example.description}}}
 
-{{#if label}} ||| {{label}} {{/if}}
-```{{language}} {{../title}}
+{{#each example.sections}}
+#### {{{title}}}
+
+{{#each code}}
++++ {{label}}
+```{{language}} #
 {{{code}}}
 ```
 
 {{/each}}
++++
+
+{{{description}}}
 {{/each}}
 {{/if}}

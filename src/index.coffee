@@ -60,17 +60,21 @@ denormalize = do ({
           returns.name = "&rarr; #{returns.name}"
         addSymbol description.symbols, returns
 
-    if description.examples?
-      for example in description.examples
-        labels = ! _.isEmpty _.keys example.code
-        for language, code of example.code
-          example.code[language] =
+    if description.example?
+
+      for section in description.example.sections
+        versions = []
+        labels = ! _.isEmpty _.keys section.code
+        for language, code of section.code
+          versions.push
             code: code
             language: _.toLowerCase language
             label: if labels then language
 
+        section.code = versions
+
 normalize = (reference) ->
-  reference.replace /[^\w\s]/g, ""
+  reference.replace /[^\w\s:.]/g, ""
 
 compile = (description, index = {}) ->
   md = templates[ description.type ] denormalize description
